@@ -6,7 +6,7 @@
 /*   By: jaisanch <jaisanch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 18:00:38 by jaisanch          #+#    #+#             */
-/*   Updated: 2023/06/27 18:14:46 by jaisanch         ###   ########.fr       */
+/*   Updated: 2023/06/27 18:43:33 by jaisanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,10 @@ int	ft_printstr(char *str)
 		i++;
 	}
 	return (i);
+}
+
+int	ft_printporcent(void)
+{
+	write(1, "%", 1);
+	return (1);
 }
