@@ -8,7 +8,7 @@ AR = ar rcs
 
 RM	= rm -rf
 
-FILES = ft_printf.c
+FILES = ft_printf.c ft_printhexa.c ft_printnbr.c ft_print_utils.c ft_print_unsigned.c \
 
 OBJS	= ${FILES:.c=.o}
 

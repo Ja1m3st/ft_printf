@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_print_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaisanch <jaisanch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 15:55:24 by jaisanch          #+#    #+#             */
-/*   Updated: 2023/06/27 18:13:48 by jaisanch         ###   ########.fr       */
+/*   Created: 2023/06/27 18:00:38 by jaisanch          #+#    #+#             */
+/*   Updated: 2023/06/27 18:14:46 by jaisanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdlib.h>
-# include <stdarg.h>
-# include <unistd.h>
+int	ft_printstr(char *str)
+{
+	int	i;
 
-int	ft_printf(char const *str, ...);
-int	ft_printhexa(unsigned long long ptr);
-int	ft_printnbr(int nb);
-int	ft_printstr(char *str);
-int	ft_print_unsigned(unsigned int nb);
-
-#endif
+	i = 0;
+	while (str[i] != 0)
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	return (i);
+}
