@@ -6,7 +6,7 @@
 /*   By: jaisanch <jaisanch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 15:46:34 by jaisanch          #+#    #+#             */
-/*   Updated: 2023/06/27 18:43:47 by jaisanch         ###   ########.fr       */
+/*   Updated: 2023/06/28 17:15:47 by jaisanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,15 @@ int	ft_formats(va_list args, char format)
 	else if (format == 's')
 		value += ft_printstr(va_arg(args, char *));
 	else if (format == 'p')
-		value += ft_printhexa(va_arg(args, unsigned long long));
+		value += ft_printf_ptr(va_arg(args, unsigned long long));
 	else if (format == 'd' || format == 'i')
-		value += ft_printnbr(va_arg(args, int));
+		value += ft_printf_nbr(va_arg(args, int));
 	else if (format == 'u')
-		value += ft_print_unsigned(va_arg(args, unsigned int));
+		value += ft_printf_unsigned(va_arg(args, unsigned int));
+	else if (format == 'x' || format == 'X')
+		value += ft_printf_hexa(va_arg(args, unsigned int), format);
 	else if (format == '%')
-		value += ft_printporcent();
+		value += ft_putchar('%');
 	return (value);
 }
 
@@ -49,7 +51,7 @@ int	ft_printf(char const *str, ...)
 	va_start(args, str);
 	while (str[i])
 	{
-		if (str[i] == '%')
+		if (str[i] == '%' && str[i] != '\0')
 		{
 			value += ft_formats(args, str[i + 1]);
 			i++;
@@ -61,6 +63,3 @@ int	ft_printf(char const *str, ...)
 	va_end(args);
 	return (value);
 }
-// int main(){
-// 	ft_printf("%%", %);
-// }

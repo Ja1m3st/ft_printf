@@ -1,22 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_unsigned.c                                :+:      :+:    :+:   */
+/*   ft_printf_nbr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaisanch <jaisanch@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/27 18:05:36 by jaisanch          #+#    #+#             */
-/*   Updated: 2023/06/27 18:35:20 by jaisanch         ###   ########.fr       */
+/*   Created: 2023/06/27 17:19:09 by jaisanch          #+#    #+#             */
+/*   Updated: 2023/06/28 16:46:25 by jaisanch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-long int	ft_ulen(unsigned int nb)
+static char	*ft_array(char *str, unsigned int number, long int len)
+{
+	while (number > 0)
+	{
+		str[len--] = 48 + (number % 10);
+		number /= 10;
+	}
+	return (str);
+}
+
+long int	ft_len(int nb)
 {
 	int	len;
 
 	len = 0;
+	if (nb <= 0)
+	{
+		len = 1;
+	}
 	while (nb != 0)
 	{
 		nb = nb / 10;
@@ -25,38 +39,37 @@ long int	ft_ulen(unsigned int nb)
 	return (len);
 }
 
-char	*ft_uitoa(unsigned int nb)
+char	*ft_itoa(int nb)
 {
-	int		len;
-	char	*str;
+	long int		len;
+	char			*str;
+	unsigned int	number;
 
-	len = ft_ulen(nb);
+	len = ft_len(nb);
 	str = (char *)malloc(sizeof(char) * (len + 1));
 	if (!(str))
 		return (NULL);
-	str[len] = '\0';
-	while (nb != 0)
+	str[len--] = '\0';
+	if (nb == 0)
+		str[0] = '0';
+	if (nb < 0)
 	{
-		str[len - 1] = nb % 10 + 48;
-		nb /= 10;
-		len--;
+		number = nb * -1;
+		str[0] = '-';
 	}
+	else
+		number = nb;
+	str = ft_array(str, number, len);
 	return (str);
 }
 
-int	ft_print_unsigned(unsigned int nb)
+int	ft_printf_nbr(int nb)
 {
 	char	*num;
 	int		len;
 
-	len = 0;
-	if (nb == 0)
-		len += write(1, "0", 1);
-	else
-	{
-		num = ft_uitoa(nb);
-		len += ft_printstr(num);
-		free(num);
-	}
+	num = ft_itoa(nb);
+	len = ft_printstr(num);
+	free(num);
 	return (len);
 }
